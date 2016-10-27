@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TasklistService.iml" filepath="$PROJECT_DIR$/TasklistService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParrcService.iml" filepath="$PROJECT_DIR$/ParrcService.iml" />
     </modules>
   </component>
 </project>
