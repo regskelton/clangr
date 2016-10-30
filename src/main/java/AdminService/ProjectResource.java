@@ -5,10 +5,7 @@ import com.google.common.base.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ import java.util.List;
  * Created by reg on 02/10/2016.
  */
 @Path("/projects")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
 public class ProjectResource {
     private final List<Project> projects;
 
@@ -39,9 +36,10 @@ public class ProjectResource {
 
     }
 
+
     @GET
     @Timed
-    public List<Project> listProjects(@QueryParam("contains") Optional<String> contains) {
+    public List<Project> getProjects(@QueryParam("contains") Optional<String> contains) {
         List<Project> output = new ArrayList<Project>();
 
         String query = contains.or("");
@@ -53,5 +51,24 @@ public class ProjectResource {
         }
 
         return output;
+    }
+
+    @Path("/{id}")
+    @Produces({MediaType.TEXT_HTML, MediaType.APPLICATION_JSON})
+    @GET
+    @Timed
+    public ProjectView getProjectById(@PathParam("id") Optional<String> idParam) {
+
+        String id= idParam.or("");
+
+        for (Project p : projects) {
+            System.out.println("Comparing [" + p.getId() + "] to [" + idParam + "]");
+
+            if (p.getId().equals(id)) {
+                return new ProjectView(p);
+            }
+        }
+
+        throw new WebApplicationException(401);
     }
 }

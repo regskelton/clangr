@@ -4,6 +4,7 @@ import AdminService.health.AdminHealth;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.views.ViewBundle;
 
 public class AdminServiceApplication extends Application<AdminServiceConfiguration> {
 
@@ -18,7 +19,7 @@ public class AdminServiceApplication extends Application<AdminServiceConfigurati
 
     @Override
     public void initialize(Bootstrap<AdminServiceConfiguration> bootstrap) {
-        // nothing to do yet
+        bootstrap.addBundle(new ViewBundle());
     }
 
     @Override
