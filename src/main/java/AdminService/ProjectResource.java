@@ -69,6 +69,6 @@ public class ProjectResource {
             }
         }
 
-        throw new WebApplicationException(401);
+        throw new WebApplicationException(404);
     }
 }
