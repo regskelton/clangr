@@ -8,35 +8,18 @@ import java.util.List;
 /*
  * Created by reg on 26/10/2016.
  */
-public class Project {
-    private String id;
-    private String name;
-    private String description;
+public class Project extends IdNameDescription {
     private List<Role> roles = new ArrayList<>();
 
     public Project() {
-        // Jackson deserialization
     }
 
     public Project(String id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+        super(id, name, description);
     }
 
-    @JsonProperty
-    public String getId() {
-        return id;
-    }
-
-    @JsonProperty
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty
-    public String getDescription() {
-        return description;
+    public Project(String name, String description) {
+        super(name, description);
     }
 
     @JsonProperty

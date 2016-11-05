@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/assets/css/skeleton.css"/>
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+</head>
+<body>
+<div class="container">
+    <row>
+        <div class="three columns">
+            <h1>{{projects.size}} projects</h1>
+            <ul>
+                {{#projects}}
+                    <li><a href="/projects/{{id}}">{{name}}</a></li>{{/projects}}
+            </ul>
+
+            <form method="post" action="/projects">
+                <textarea name="name"></textarea>
+                <textarea name="description"></textarea>
+                <br/>
+                <button>Submit</button>
+            </form>
+        </div>
+    </row>
+</div>
+</body>
+</html>

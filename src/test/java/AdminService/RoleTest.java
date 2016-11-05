@@ -18,7 +18,7 @@ public class RoleTest {
         String id2 = r2.getId();
 
         assertFalse("Ids should be different [" + id1 + "],[" + id2 + "]",
-                id2.equals(id2));
+                id2.equals(id1));
     }
 
 }

@@ -25,21 +25,22 @@ public class ProjectResource {
     public ProjectResource() {
         projects = new ArrayList<>();
 
-        projects.add( new Project( "123.2", "Gingerbread Baking", "Create twelve thousand gingerbread people"));
-        projects.add( new Project( "143.2", "Car wash", "Clean the car using fairy liquid"));
-        projects.add( new Project( "133.2", "Clean roof", "Get the ladders out and scrpae the mould out"));
-        projects.add( new Project( "126.2", "Cook dinner", "Yum, roast chicken please"));
-        projects.add( new Project( "121.2", "Book holiday", "Maybe combine with a Java course in Hania"));
-        projects.add( new Project( "124.2", "Write code", "Combine with book a holiday?"));
-        projects.add( new Project( "127.2", "Read book", "Anything by Neal Stephenson"));
-        projects.add( new Project( "123.9", "Record an album", "Going to bigger than Alphaville"));
+        projects.add(new Project("Gingerbread Baking", "Create twelve thousand gingerbread people"));
+        projects.add(new Project("Car wash", "Clean the car using fairy liquid"));
+        projects.add(new Project("Clean roof", "Get the ladders out and scrpae the mould out"));
+        projects.add(new Project("Cook dinner", "Yum, roast chicken please"));
+        projects.add(new Project("Book holiday", "Maybe combine with a Java course in Hania"));
+        projects.add(new Project("Write code", "Combine with book a holiday?"));
+        projects.add(new Project("Read book", "Anything by Neal Stephenson"));
+        projects.add(new Project("Record an album", "Going to bigger than Alphaville"));
 
+        projects.get(1).addRole(new Role("Project Manager", "Lead PM"));
     }
 
 
     @GET
     @Timed
-    public List<Project> getProjects(@QueryParam("contains") Optional<String> contains) {
+    public ProjectsView getProjects(@QueryParam("contains") Optional<String> contains) {
         List<Project> output = new ArrayList<Project>();
 
         String query = contains.or("");
@@ -50,7 +51,28 @@ public class ProjectResource {
             }
         }
 
-        return output;
+        return new ProjectsView(output);
+    }
+
+
+    @POST
+    @Timed
+    public ProjectsView postProject(@FormParam("name") Optional<String> nameParam,
+                                    @FormParam("description") Optional<String> descriptionParam) {
+
+        if (!nameParam.isPresent()) {
+            throw new WebApplicationException("Name is required for a new project", 503);
+        }
+
+        if (!descriptionParam.isPresent()) {
+            throw new WebApplicationException("Description is required for a new project", 503);
+        }
+
+        Project p = new Project(nameParam.get(), descriptionParam.get());
+
+        projects.add(p);
+
+        return new ProjectsView(projects);
     }
 
     @Path("/{id}")
@@ -59,7 +81,7 @@ public class ProjectResource {
     @Timed
     public ProjectView getProjectById(@PathParam("id") Optional<String> idParam) {
 
-        String id= idParam.or("");
+        String id = idParam.or("");
 
         for (Project p : projects) {
             System.out.println("Comparing [" + p.getId() + "] to [" + idParam + "]");
