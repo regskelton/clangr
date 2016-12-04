@@ -91,6 +91,7 @@
     <orderEntry type="library" name="Maven: net.sourceforge.argparse4j:argparse4j:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain.setuid:jetty-setuid-java:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views:0.9.1" level="project" />
+    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-assets:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views-mustache:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.spullara.mustache.java:compiler:0.8.17" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />

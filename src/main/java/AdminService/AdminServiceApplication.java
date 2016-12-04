@@ -2,6 +2,7 @@ package AdminService;
 
 import AdminService.health.AdminHealth;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.views.ViewBundle;
@@ -19,7 +20,10 @@ public class AdminServiceApplication extends Application<AdminServiceConfigurati
 
     @Override
     public void initialize(Bootstrap<AdminServiceConfiguration> bootstrap) {
+
         bootstrap.addBundle(new ViewBundle());
+        bootstrap.addBundle(new AssetsBundle("/assets", "/assets"));
+
     }
 
     @Override
